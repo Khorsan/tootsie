@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+ <div class="jumbotron text-white rounded bg-dark mt-4">
+      <h1 class="display-4 font-italic">List of Client's</h1>
+      <p class="lead my-3">Somthing</p>
+  </div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card border rounded shadow-sm mb-4 mt-4">
+			<div class="card-body text-center">
+				<h5 class="car-title mb-2 text-primary">Client's</h5>
+				<p class="card-text mb-auto">
+
+					<table class="table">
+						<thead>
+							<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Name</th>
+							<th scope="col">NIF</th>
+							<th scope="col">Email</th>
+							<th scope="col">Saldo</th>
+							<th scope="col">Divida</th>
+							<th scope="col">Desconto</th>
+							<!--
+							<th scope="col">Edit</th>
+							<th scope="col">Delete</th>
+							-->
+						</tr>
+						</thead>
+						<tbody>
+
+							{% if clients %}
+								{% for o in clients %}
+							
+								<tr>
+									<td scope="row"><a href="{% url 'client_show' o.id %}">{{ o.id }}</a></td>
+									<td>{{ o.name }}</td>
+									<td>{{ o.nIF }}</td>
+									<td>{{ o.email }}</td>
+									<td>{{ o.saldo }}</td>
+									<td>{{ o.divida }}</td>
+									<td>{{ o.desconto }}</td>
+									<!--  
+									<td scope="row"><a href="{% url 'client-edit' o.id %}"><button class="btn btn-warning">Edit</button></a></td> 
+									<td scope="row"><a href="{% url 'client-delete' o.id %}"><button class="btn btn-danger delete">Delete</button></a></td>
+									 -->
+									
+									
+								</tr>
+								
+							{% endfor %}
+							{% else %}
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td class="centered"><h3><b><i><u>No registered customers</u></i></b></h3><td>
+							<td> </td>
+							{% endif %}
+							
+						</tbody>
+					</table>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
