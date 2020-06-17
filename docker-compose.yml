@@ -1,0 +1,27 @@
+  version: '3'
+    
+  services:
+    db:
+      image: mariadb
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_USER: user
+        MYSQL_PASSWORD: password
+        MYSQL_DATABASE: djangodb
+    dbp:
+      image: postgres
+      environment:
+        - POSTGRES_DB=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+    django:
+      build: .
+      command: ./startup.sh
+      depends_on:
+      - dbp
+      volumes:
+        - .:/code
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db

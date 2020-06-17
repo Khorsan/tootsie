@@ -81,9 +81,26 @@ WSGI_APPLICATION = 'tootsie.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '172.30.0.3',
+        'PORT': 5432,
+        # 'ENGINE': 'django.db.backends.mysql', 
+        # 'NAME': 'djangodb',
+        # 'USER': 'root',
+        # 'PASSWORD': 'password',
+        # 'HOST': 'db',   # Or an IP Address that your DB is hosted on
+        # 'PORT': '3306',
+        # 'OPTIONS': {
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        # }
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 
