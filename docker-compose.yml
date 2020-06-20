@@ -8,12 +8,6 @@
         MYSQL_USER: user
         MYSQL_PASSWORD: password
         MYSQL_DATABASE: djangodb
-    dbp:
-      image: postgres
-      environment:
-        - POSTGRES_DB=postgres
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
     django:
       build: .
       command: ./startup.sh
