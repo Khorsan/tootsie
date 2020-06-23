@@ -11,32 +11,20 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
   deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     # Runs a set of commands using the runners shell
+    - name: Cleans git files
+      run: |
+        rm -rf .git .gitignore .github
+
     - uses: webfactory/ssh-agent@v0.3.0
       with:
         ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
     - name: Loads remote fingerprint
       run:  ssh-keyscan "${{ secrets.DEPLOY_HOST }}" > ~/.ssh/known_hosts
-    - name: list current files
-      run: ls -la
     - name: Copy repo into deploy directory
       run: scp -r . ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie
     - name: Run deploy command
