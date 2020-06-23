@@ -34,6 +34,8 @@ jobs:
         ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
     - name: Loads remote fingerprint
       run:  ssh-keyscan "${{ secrets.DEPLOY_HOST }}" > ~/.ssh/known_hosts
+    - name: list current files
+      run: ls -la
     - name: Copy repo into deploy directory
       run: scp -r . ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie
     - name: Run deploy command
