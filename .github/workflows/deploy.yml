@@ -33,5 +33,6 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
     - run: |
+        ssh-keyscan "${{ secrets.DEPLOY_HOST }}" > ~/.ssh/known_hosts
         ssh  ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} ls -la
 
