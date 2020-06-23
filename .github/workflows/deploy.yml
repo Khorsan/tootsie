@@ -28,6 +28,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     # Runs a set of commands using the runners shell
     - uses: webfactory/ssh-agent@v0.3.0
       with:
