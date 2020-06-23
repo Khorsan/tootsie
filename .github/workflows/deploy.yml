@@ -32,8 +32,10 @@ jobs:
     - uses: webfactory/ssh-agent@v0.3.0
       with:
         ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-    - run: |
-        ssh-keyscan "${{ secrets.DEPLOY_HOST }}" > ~/.ssh/known_hosts
-        scp -r . ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie
-        ssh  ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie.sh
+    - name: Loads remote fingerprint
+      run:  ssh-keyscan "${{ secrets.DEPLOY_HOST }}" > ~/.ssh/known_hosts
+    - name: Copy repo into deploy directory
+      run: scp -r . ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie
+    - name: Run deploy command
+      run: ssh  ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie.sh
 
