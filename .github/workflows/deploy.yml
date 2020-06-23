@@ -37,5 +37,5 @@ jobs:
     - name: Copy repo into deploy directory
       run: scp -r . ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie
     - name: Run deploy command
-      run: ssh  ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_DIR }}/tootsie.sh
+      run: ssh  ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} bash ${{ secrets.DEPLOY_DIR }}/tootsie.sh
 
